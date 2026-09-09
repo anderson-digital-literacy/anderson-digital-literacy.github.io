@@ -3,27 +3,579 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Literacy Student Resources</title>
+  <meta name="description" content="Course resources and certification information for Digital Literacy students.">
+  <title>Digital Literacy | Student Resources</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17232f;
+      --muted: #617080;
+      --paper: #f7f8f4;
+      --surface: #ffffff;
+      --line: #dce5e2;
+      --teal: #087f78;
+      --teal-dark: #075c5a;
+      --coral: #e66b4f;
+      --gold: #f2bd55;
+      --shadow: 0 22px 55px rgba(25, 56, 65, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 6% 3%, rgba(242, 189, 85, 0.22), transparent 22rem),
+        radial-gradient(circle at 96% 35%, rgba(8, 127, 120, 0.13), transparent 28rem),
+        var(--paper);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      animation: rise-in 700ms ease both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--teal);
+      box-shadow: 5px 5px 0 var(--gold);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border: 2px solid currentColor;
+      content: "";
+      transform: rotate(45deg);
+    }
+
+    .brand-mark::after {
+      width: 7px;
+      height: 7px;
+      border-color: var(--gold);
+      transform: translate(4px, 4px) rotate(45deg);
+    }
+
+    .topbar-note {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: clamp(36px, 7vw, 96px);
+      align-items: center;
+      min-height: 455px;
+      padding: 54px 0 76px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      animation: rise-in 700ms 100ms ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--teal);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 32px;
+      height: 3px;
+      border-radius: 99px;
+      background: var(--coral);
+      content: "";
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.05;
+    }
+
+    h1 {
+      max-width: 690px;
+      margin-bottom: 24px;
+      font-size: clamp(3.2rem, 8vw, 6.6rem);
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy > p:not(.eyebrow) {
+      max-width: 530px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2vw, 1.2rem);
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 315px;
+      place-items: center;
+      animation: rise-in 700ms 220ms ease both;
+    }
+
+    .art-disc {
+      position: absolute;
+      width: min(30vw, 290px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(8, 127, 120, 0.26);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .art-disc::before,
+    .art-disc::after {
+      position: absolute;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .art-disc::before {
+      inset: 27px;
+      border: 1px dashed rgba(8, 127, 120, 0.45);
+    }
+
+    .art-disc::after {
+      inset: 75px;
+      background: rgba(242, 189, 85, 0.2);
+    }
+
+    .floating-card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 335px);
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      transform: rotate(4deg);
+    }
+
+    .card-kicker {
+      margin-bottom: 34px;
+      color: var(--coral);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .floating-card h2 {
+      margin-bottom: 16px;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .floating-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .spark {
+      position: absolute;
+      display: block;
+      width: 13px;
+      height: 13px;
+      background: var(--coral);
+      transform: rotate(45deg);
+    }
+
+    .spark.one {
+      top: 18px;
+      right: 14%;
+    }
+
+    .spark.two {
+      bottom: 22px;
+      left: 6%;
+      width: 9px;
+      height: 9px;
+      background: var(--gold);
+    }
+
+    .resources {
+      padding: 54px 0 90px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      max-width: 280px;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: right;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .resource-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 112px;
+      gap: 18px;
+      padding: 24px 26px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      text-decoration: none;
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+    }
+
+    .resource-link:first-child {
+      grid-column: span 2;
+      border-color: rgba(8, 127, 120, 0.32);
+      background: linear-gradient(110deg, #e9f4f0, #ffffff 70%);
+    }
+
+    .resource-link::after {
+      position: absolute;
+      right: -18px;
+      bottom: -22px;
+      width: 74px;
+      height: 74px;
+      border: 1px solid rgba(8, 127, 120, 0.12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .resource-link:hover,
+    .resource-link:focus-visible {
+      border-color: var(--teal);
+      box-shadow: 0 12px 30px rgba(25, 56, 65, 0.1);
+      outline: none;
+      transform: translateY(-4px);
+    }
+
+    .resource-info {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .resource-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--teal-dark);
+      background: #d9eeea;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .resource-link:first-child .resource-number {
+      color: #fff;
+      background: var(--teal);
+    }
+
+    .resource-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .resource-type {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .arrow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--teal-dark);
+      font-size: 1.15rem;
+      transition: background 220ms ease, color 220ms ease;
+    }
+
+    .resource-link:hover .arrow,
+    .resource-link:focus-visible .arrow {
+      color: #fff;
+      background: var(--teal);
+    }
+
+    footer {
+      padding: 25px 0 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    footer p {
+      max-width: 580px;
+      margin-bottom: 0;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-shell {
+        width: min(100% - 28px, 560px);
+      }
+
+      .topbar {
+        padding: 18px 0;
+      }
+
+      .topbar-note {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        min-height: auto;
+        padding: 64px 0 58px;
+      }
+
+      h1 {
+        font-size: clamp(3.1rem, 16vw, 5rem);
+      }
+
+      .hero-art {
+        min-height: 260px;
+      }
+
+      .art-disc {
+        width: 260px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 12px;
+        text-align: left;
+      }
+
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-link:first-child {
+        grid-column: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Digital Literacy Student Resources</h1>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Digital Literacy home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Digital Literacy</span>
+      </a>
+      <span class="topbar-note">Student resource portal</span>
+    </header>
 
-  <p>Welcome! This site contains course resources and certification information.</p>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Learn with confidence</p>
+          <h1 id="page-title">Your next skill starts here.</h1>
+          <p>Welcome! Find course resources, practical tools, and certification information gathered in one clear place.</p>
+        </div>
 
-  <h2>Resources</h2>
-  <ul>
-    <li><a href="#">Certification Program</a></li>
-    <li><a href="#">Microsoft Word Resources</a></li>
-    <li><a href="#">Excel Resources</a></li>
-    <li><a href="#">PowerPoint Resources</a></li>
-    <li><a href="#">Google Docs Resources</a></li>
-  </ul>
+        <div class="hero-art" aria-hidden="true">
+          <span class="art-disc"></span>
+          <span class="spark one"></span>
+          <span class="spark two"></span>
+          <div class="floating-card">
+            <div class="card-kicker">A toolkit for progress</div>
+            <h2>Make the digital world work for you.</h2>
+            <p>Explore the essentials, one focused step at a time.</p>
+          </div>
+        </div>
+      </section>
 
-  <hr>
+      <section class="resources" aria-labelledby="resources-title">
+        <div class="section-heading">
+          <h2 id="resources-title">Explore resources</h2>
+          <p>Choose a topic to continue your learning journey.</p>
+        </div>
 
-  <p>
-    Independent educational resource created by the course instructor.
-    This is not an official school district website.
-  </p>
+        <nav class="resource-grid" aria-label="Student resources">
+          <a class="resource-link" href="[#](https://anderson-digital-literacy.github.io/#)">
+            <span class="resource-info">
+              <span class="resource-number">01</span>
+              <span>
+                <span class="resource-title">Certification Program</span>
+                <span class="resource-type">Start here</span>
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">&#8599;</span>
+          </a>
+
+          <a class="resource-link" href="[#](https://anderson-digital-literacy.github.io/#)">
+            <span class="resource-info">
+              <span class="resource-number">02</span>
+              <span>
+                <span class="resource-title">Microsoft Word Resources</span>
+                <span class="resource-type">Documents and writing</span>
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">&#8599;</span>
+          </a>
+
+          <a class="resource-link" href="[#](https://anderson-digital-literacy.github.io/#)">
+            <span class="resource-info">
+              <span class="resource-number">03</span>
+              <span>
+                <span class="resource-title">Excel Resources</span>
+                <span class="resource-type">Data and spreadsheets</span>
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">&#8599;</span>
+          </a>
+
+          <a class="resource-link" href="[#](https://anderson-digital-literacy.github.io/#)">
+            <span class="resource-info">
+              <span class="resource-number">04</span>
+              <span>
+                <span class="resource-title">PowerPoint Resources</span>
+                <span class="resource-type">Presentations and ideas</span>
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">&#8599;</span>
+          </a>
+
+          <a class="resource-link" href="[#](https://anderson-digital-literacy.github.io/#)">
+            <span class="resource-info">
+              <span class="resource-number">05</span>
+              <span>
+                <span class="resource-title">Google Docs Resources</span>
+                <span class="resource-type">Collaboration and cloud tools</span>
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </nav>
+      </section>
+    </main>
+
+    <footer>
+      <p>Independent educational resource created by the course instructor. This is not an official school district website.</p>
+    </footer>
+  </div>
 </body>
 </html>
